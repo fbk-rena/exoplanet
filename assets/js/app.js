@@ -14,20 +14,20 @@ function getJSON(url) {
 
 //Plantilla para mostrar informacion en HTML
 var plantilla = `<div class="row">
-        <div class="col s12 m7">
+        <div class="col s12 m5">
           <div class="card">
             <div class="card-image">
-              <img src="images/sample-1.jpg">
-              <span class="card-title">__planetName</span>
+              <img class="circle" src="https://dummyimage.com/150x150/000/fff.jpg">
+              <span class="card-title">__planetName__</span>
             </div>
             <div class="card-content">
-                <p>Fue descubierto en __descubrimiento__ </p>
-                <span></span>
-                <span></span>
-                <span></span>
+                <p>__planetName__ fue descubierto en __descubrimiento__, __metodo__ fue el método por el cual fue descubierto. Tarda __orbitDays__ días en dar la vuelata a su orbita. Se encuentra a __pc__ parsecs de la tierra.
+                </p>
             </div>
             <div class="card-action">
-              <a href="#">This is a link</a>
+              <a href="#">Más información</a>
+            <a href="__sitio1__">exoplanets.org</a>
+            <a href="__sitio2__">exoplanet.eu</a>    
             </div>
           </div>
         </div>
@@ -52,5 +52,17 @@ getJSON("data/earth-like-results.json")
             var namePlanet = planeta.pl_name; //Nombre de planeta
             var descubierto = planeta.pl_disc; //
             console.log(namePlanet, descubierto);
+            var contenedorPlaneta = document.getElementById("planetas");
+            var pantillaFinal = ' ';
+            
+            plantillaFinal = plantilla.replace('__planetName__', planeta.pl_name)
+            .replace('__planetName__', planeta.pl_name)
+            .replace('__descubrimiento__',planeta.pl_disc)
+            .replace('__metodo__', planeta.pl_discmethod)
+            .replace('__orbitDays__', planeta.pl_orbper)
+            .replace('__pc__',planeta.st_dist)
+            .replace('__sitio1__', planeta.pl_edelink)
+            .replace('__sitio2__', planeta.pl_pelink);
+            contenedorPlaneta.insertAdjacentHTML( 'beforeend', plantillaFinal);
         })
     })
